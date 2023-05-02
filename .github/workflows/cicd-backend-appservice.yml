@@ -29,9 +29,15 @@ jobs:
           python -m venv venv
           source venv/bin/activate
       
-      - name: Checking the file system listing for Azure Web App Backend
+      - name: Checking the current directory for Azure Web App Backend
         run: |
           pwd
+      - name: Checking the current directory listing for Azure Web App Backend
+        run: |
+          ls -al
+      - name: Checking the backend directory listing for Azure Web App Backend
+        run: |
+          cd app/backend
           
       - name: Set up dependency caching for faster installs
         uses: actions/cache@v3
