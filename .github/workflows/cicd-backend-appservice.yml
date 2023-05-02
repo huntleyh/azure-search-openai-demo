@@ -28,16 +28,10 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate
-      
-      - name: Checking the current directory for Azure Web App Backend
-        run: |
-          pwd
+
       - name: Checking the current directory listing for Azure Web App Backend
         run: |
           ls -al
-      - name: Checking the backend directory listing for Azure Web App Backend
-        run: |
-          cd app/backend
           
       - name: Set up dependency caching for faster installs
         uses: actions/cache@v3
@@ -48,7 +42,7 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r app/backend/requirements.txt
 
       # Optional: Add a step to run tests here (PyTest, Django test suites, etc.)
 
