@@ -10,6 +10,7 @@ on:
       - main
     paths:
       - app/backend/**
+  workflow_dispatch:
 
 jobs:
   build:
