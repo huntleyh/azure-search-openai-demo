@@ -26,6 +26,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Create and start virtual environment
+        working-directory: app/backend
         run: |
           python -m venv venv
           source venv/bin/activate
@@ -39,8 +40,10 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: Install dependencies
+        working-directory: app/backend
         run: |
           cd app/backend
+          pip install --upgrade pip
           pip install -r requirements.txt
           
       # Optional: Add a step to run tests here (PyTest, Django test suites, etc.)
@@ -50,8 +53,9 @@ jobs:
         with:
           name: ${{ env.AZURE_WEBAPP_NAME }}
           path: |
-            .
+            app/backend
             !venv/
+            !app/backend/venv/
     
   deploy:
     runs-on: ubuntu-latest
@@ -62,7 +66,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ env.AZURE_WEBAPP_NAME }}
-          path: .
+          path: app/backend
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -70,5 +74,5 @@ jobs:
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/app/backend
+          package: app/backend
 
