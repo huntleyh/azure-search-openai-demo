@@ -13,17 +13,19 @@ on:
       - app/backend/**
   workflow_dispatch:
 
-defaults:
-  run:
-    working-directory: app/backend
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v3
-       
+
+      - name: CD to Backend App
+        run: |
+          pwd
+          cd app/backend
+          pwd      
+        
       - name: Set up Python version
         uses: actions/setup-python@v4
         with:
