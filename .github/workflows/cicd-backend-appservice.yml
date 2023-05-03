@@ -1,7 +1,7 @@
 name: Build and deploy Python app to Azure Web App Backend
 
 env:
-  AZURE_WEBAPP_NAME: openai-demo   # set this to your application's name
+  AZURE_WEBAPP_NAME: chtremblbackend  # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'
   PYTHON_VERSION: '3.8'               # set this to the Python version to use
 
