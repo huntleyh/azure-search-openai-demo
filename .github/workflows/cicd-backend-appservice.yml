@@ -1,4 +1,4 @@
-name: Build and deploy Python app to Azure Web App Backend
+name: Build and deploy OpenAI Demo App
 
 env:
   AZURE_WEBAPP_NAME: chtremblbackend  # set this to your application's name
