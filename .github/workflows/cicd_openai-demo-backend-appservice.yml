@@ -35,6 +35,8 @@ jobs:
         
       - name: Building web app
         uses: azure/appservice-build@v2
+        with:
+          working-directory: app/backend
 
       # Optional: Add a step to run tests here (PyTest, Django test suites, etc.)
 
