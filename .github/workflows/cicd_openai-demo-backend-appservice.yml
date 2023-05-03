@@ -25,6 +25,7 @@ jobs:
           pwd
           cd app/backend
           pwd      
+          ls -lr
         
       - name: Set up Python version
         uses: actions/setup-python@v4
