@@ -8,8 +8,8 @@ echo ""
 #    value=$(echo "$value" | sed 's/^"//' | sed 's/"$//')
 #    export "$key=$value"
 #done <<EOF
-$(azd env get-values)
-EOF
+#$(azd env get-values)
+#EOF
 
 echo 'Creating python virtual environment "scripts/.venv"'
 python -m venv scripts/.venv
