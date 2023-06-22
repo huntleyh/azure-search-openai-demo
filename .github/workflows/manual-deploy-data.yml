@@ -37,20 +37,6 @@ jobs:
             az version
       - name: Install Azure Developer CLI
         run: curl -fsSL https://aka.ms/install-azd.sh | bash
-
-      - name: Log in with Azure (Client Credentials)
-        if: ${{ env.AZURE_CREDENTIALS != '' }}
-        run: |
-          $info = $Env:AZURE_CREDENTIALS | ConvertFrom-Json -AsHashtable;
-          Write-Host "::add-mask::$($info.clientSecret)"
-
-          azd auth login `
-            --client-id "$($info.clientId)" `
-            --client-secret "$($info.clientSecret)" `
-            --tenant-id "$($info.tenantId)"
-        shell: pwsh
-        env:
-          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
     
       - name: Set up Python version
         uses: actions/setup-python@v3.0.0
@@ -66,6 +52,15 @@ jobs:
               set +x
               echo "${{env.TENANTID }}"
               echo "${{env.AZURE_CREDENTIALS}}"
+              echo "Logging in with"
+              echo "ClientId: ${{env.AZURE_CREDENTIALS.clientId}}"
+              echo "Client Secret: ${{env.AZURE_CREDENTIALS.clientSecret}}"
+              echo "TenantId: ${{env.AZURE_CREDENTIALS.tenantId}}"
+              azd auth login \
+                --client-id "${{env.AZURE_CREDENTIALS.clientId}}" \
+                --client-secret "${{env.AZURE_CREDENTIALS.clientSecret}}" \
+                --tenant-id "${{env.AZURE_CREDENTIALS.tenantId}}"
+            
               #python scripts/test.py '${{env.TENANTID }}'
                ./scripts/prepdocs.sh 
         env:
