@@ -65,5 +65,8 @@ jobs:
               chmod +x scripts/prepdocs.sh
               set +x
               echo "${{env.TENANTID }}"
+              echo "${{env.AZURE_CREDENTIALS}}"
               #python scripts/test.py '${{env.TENANTID }}'
                ./scripts/prepdocs.sh 
+        env:
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
