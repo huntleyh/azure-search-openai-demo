@@ -53,9 +53,9 @@ jobs:
               echo "${{env.TENANTID }}"
               echo "${{env.AZURE_CREDENTIALS}}"
               echo "Logging in with"
-              clientId=$(echo "${{env.AZURE_CREDENTIALS}}" | jq -r '.clientId')
-              clientSecret=$(echo "${{env.AZURE_CREDENTIALS}}" | jq -r '.clientSecret')
-              tenantId=$(echo "${{env.AZURE_CREDENTIALS}}" | jq -r '.tenantId')
+              clientId=$(echo "${env.AZURE_CREDENTIALS}" | jq -r '.clientId')
+              clientSecret=$(echo "${env.AZURE_CREDENTIALS}" | jq -r '.clientSecret')
+              tenantId=$(echo "${env.AZURE_CREDENTIALS}" | jq -r '.tenantId')
               
               azd auth login \
                 --client-id "$clientId" \
