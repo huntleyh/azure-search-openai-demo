@@ -53,14 +53,14 @@ jobs:
               echo "${{env.TENANTID }}"
               echo "${{env.AZURE_CREDENTIALS}}"
               echo "Logging in with"
-              echo '${{env.AZURE_CREDENTIALS.clientId}}' | jq '.clientId'
-              echo '${{env.AZURE_CREDENTIALS.clientSecret}}' | jq '.clientSecret'
-              echo '${{env.AZURE_CREDENTIALS.tenantId}}' | jq '.tenantId'
+              clientId=$(echo "${{env.AZURE_CREDENTIALS}}" | jq -r '.clientId')
+              clientSecret=$(echo "${{env.AZURE_CREDENTIALS}}" | jq -r '.clientSecret')
+              tenantId=$(echo "${{env.AZURE_CREDENTIALS}}" | jq -r '.tenantId')
               
               azd auth login \
-                --client-id "${{env.AZURE_CREDENTIALS.clientId}}" \
-                --client-secret "${{env.AZURE_CREDENTIALS.clientSecret}}" \
-                --tenant-id "${{env.AZURE_CREDENTIALS.tenantId}}"
+                --client-id "$clientId" \
+                --client-secret "$clientSecret" \
+                --tenant-id "$tenantId"
             
               #python scripts/test.py '${{env.TENANTID }}'
                ./scripts/prepdocs.sh 
