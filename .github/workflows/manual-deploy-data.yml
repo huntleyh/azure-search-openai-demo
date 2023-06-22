@@ -53,9 +53,10 @@ jobs:
               echo "${{env.TENANTID }}"
               echo "${{env.AZURE_CREDENTIALS}}"
               echo "Logging in with"
-              echo "ClientId: ${{env.AZURE_CREDENTIALS.clientId}}"
-              echo "Client Secret: ${{env.AZURE_CREDENTIALS.clientSecret}}"
-              echo "TenantId: ${{env.AZURE_CREDENTIALS.tenantId}}"
+              echo '${{env.AZURE_CREDENTIALS.clientId}}' | jq '.clientId'
+              echo '${{env.AZURE_CREDENTIALS.clientSecret}}' | jq '.clientSecret'
+              echo '${{env.AZURE_CREDENTIALS.tenantId}}' | jq '.tenantId'
+              
               azd auth login \
                 --client-id "${{env.AZURE_CREDENTIALS.clientId}}" \
                 --client-secret "${{env.AZURE_CREDENTIALS.clientSecret}}" \
