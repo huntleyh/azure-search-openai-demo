@@ -51,7 +51,7 @@ jobs:
               chmod +x scripts/prepdocs.sh
               set +x
               echo "${{env.TENANTID }}"
-              creds="${{env.AZURE_CREDENTIALS}}"
+              creds="$azd_cred"
               echo "Logging in with"
               clientId=$(echo "$creds" | jq -r '.clientId')
               clientSecret=$(echo "$creds" | jq -r '.clientSecret')
