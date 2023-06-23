@@ -52,13 +52,10 @@ jobs:
               set +x
               echo "${{env.TENANTID }}"
               creds="$azd_cred"
-              echo "Logging in with"
+              echo "Logging in with azd"
               clientId=$(echo "$creds" | jq -r '.clientId')
               clientSecret=$(echo "$creds" | jq -r '.clientSecret')
               tenantId=$(echo "$creds" | jq -r '.tenantId')
-              echo "clientId: $clientId"
-              echo "clientSecret: $clientSecret"
-              echo "tenantId: $tenantId"
               
               azd auth login \
                 --client-id "$clientId" \
@@ -66,6 +63,5 @@ jobs:
                 --tenant-id "$tenantId"
             
               #python scripts/test.py '${{env.TENANTID }}'
+              echo "Running prepdocs.sh"
                ./scripts/prepdocs.sh 
-        env:
-          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
